@@ -4,176 +4,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:gravity="center_horizontal"
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/display"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="#CFD8DC"
-        android:gravity="end|bottom"
-        android:padding="8dp"
-        android:text="@string/calculator_display"
-        android:textSize="32sp"
-        android:textColor="#000000" />
-
-    <!-- Operators -->
-    <LinearLayout
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:text="@string/game_title"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:padding="16dp" />
 
-        <Button
-            android:id="@+id/btnPlus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/op_add" />
-
-        <Button
-            android:id="@+id/btnMinus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/op_subtract" />
-
-        <Button
-            android:id="@+id/btnMultiply"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/op_multiply" />
-
-        <Button
-            android:id="@+id/btnDivide"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/op_divide" />
-
-    </LinearLayout>
-
-    <!-- Digits 7, 8, 9 -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center"
+        android:text="@string/game_instructions"
+        android:textSize="18sp"
+        android:padding="8dp" />
 
-        <Button
-            android:id="@+id/btn7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_7" />
-
-        <Button
-            android:id="@+id/btn8"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_8" />
-
-        <Button
-            android:id="@+id/btn9"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_9" />
-
-    </LinearLayout>
-
-    <!-- Digits 4, 5, 6 -->
-    <LinearLayout
+    <EditText
+        android:id="@+id/inputGuess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:hint="@string/guess_hint"
+        android:inputType="number"
+        android:maxLength="3"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:importantForAutofill="no" />
 
-        <Button
-            android:id="@+id/btn4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_4" />
-
-        <Button
-            android:id="@+id/btn5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_5" />
-
-        <Button
-            android:id="@+id/btn6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_6" />
-
-    </LinearLayout>
-
-    <!-- Digits 1, 2, 3 -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_1" />
-
-        <Button
-            android:id="@+id/btn2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_2" />
-
-        <Button
-            android:id="@+id/btn3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_3" />
-
-    </LinearLayout>
-
-    <!-- Zero, decimal separator and equals -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn0"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/digit_0" />
-
-        <Button
-            android:id="@+id/btnDot"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/decimal_separator" />
-
-        <Button
-            android:id="@+id/btnEquals"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@string/op_equals" />
-
-    </LinearLayout>
-
-    <!-- Clear -->
     <Button
-        android:id="@+id/btnClear"
+        android:id="@+id/btnGuess"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/op_clear" />
+        android:text="@string/check_guess" />
+
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/initial_result"
+        android:textSize="20sp"
+        android:padding="16dp" />
+
+    <TextView
+        android:id="@+id/txtAttempts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/attempts_zero"
+        android:textSize="18sp"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnNewGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_game" />
 
 </LinearLayout>

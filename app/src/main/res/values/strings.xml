@@ -23,4 +23,22 @@
     <string name="digit_7">7</string>
     <string name="digit_8">8</string>
     <string name="digit_9">9</string>
+
+
+    <string name="game_title">Zgadywanka</string>
+    <string name="game_instructions">Zgadnij liczbę od 1 do 100!</string>
+    <string name="guess_hint">Wpisz liczbę</string>
+    <string name="check_guess">Sprawdź</string>
+    <string name="initial_result">Powodzenia!</string>
+    <string name="attempts_zero">Liczba prób: 0</string>
+    <string name="new_game">Nowa gra</string>
+
+    <string name="guess_too_low">Za mało! Spróbuj większej liczby.</string>
+    <string name="guess_too_high">Za dużo! Spróbuj mniejszej liczby.</string>
+    <string name="guess_correct">Brawo! Zgadłeś liczbę!</string>
+    <string name="error_empty">Wpisz liczbę przed sprawdzeniem.</string>
+    <string name="error_range">Podaj liczbę od 1 do 100.</string>
+    <string name="attempts_format">Liczba prób: %1$d</string>
+    <string name="game_restarted">Nowa gra rozpoczęta!</string>
+    <string name="game_finished">Gra zakończona. Rozpocznij nową grę.</string>
 </resources>
