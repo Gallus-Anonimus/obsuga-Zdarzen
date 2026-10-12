@@ -1,6 +1,8 @@
 package com.example.linearlayout;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private TextView display;
+
+    private final View.OnClickListener sharedListener = view -> {
+        Button button = (Button) view;
+        String digit = button.getText().toString();
+        appendSymbol(digit);
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +41,22 @@ public class MainActivity extends AppCompatActivity {
 
         display = findViewById(R.id.display);
 
-        findViewById(R.id.btn0).setOnClickListener(
-                v -> appendSymbol("0"));
+        int[] digitIds = {
+                R.id.btn0,
+                R.id.btn1,
+                R.id.btn2,
+                R.id.btn3,
+                R.id.btn4,
+                R.id.btn5,
+                R.id.btn6,
+                R.id.btn7,
+                R.id.btn8,
+                R.id.btn9
+        };
 
-        findViewById(R.id.btn1).setOnClickListener(
-                v -> appendSymbol("1"));
-
-        findViewById(R.id.btn2).setOnClickListener(
-                v -> appendSymbol("2"));
+        for (int id : digitIds) {
+            findViewById(id).setOnClickListener(sharedListener);
+        }
     }
 
     private void appendSymbol(String symbol) {
