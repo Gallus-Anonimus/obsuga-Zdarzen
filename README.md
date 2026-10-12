@@ -1,36 +1,61 @@
-# Kalkulator - refaktoryzacja
+# Zadanie 2 - Zgadywanka
 
-## Etap 1 - osobna metoda dla każdej cyfry
+## Opis aplikacji
 
-Na tym etapie każda cyfra ma własną metodę. Jeśli chcemy ograniczyć długość wyświetlanej liczby do 10 znaków, musimy wprowadzić odpowiednie sprawdzenie w 10 miejscach - po jednym dla każdej cyfry.
+Zgadywanka to prosta aplikacja napisana w języku Java na platformę Android.
 
-## Etap 2 - jedna metoda z parametrem
+Aplikacja losuje liczbę z zakresu od 1 do 100. Użytkownik wpisuje swoją propozycję i naciska przycisk „Sprawdź”.
 
-Zamiast osobnych metod dla cyfr korzystamy z jednej metody `appendSymbol(String symbol)`, która przyjmuje cyfrę jako parametr. Dzięki temu kod jest krótszy i łatwiejszy w utrzymaniu.
+Aplikacja informuje, czy podana liczba jest za mała, za duża czy poprawna. Zlicza również liczbę prób. Przycisk „Nowa gra” losuje kolejną liczbę i zeruje licznik prób.
 
-## Etap 3 - wspólny listener
+## Zrzut ekranu
 
-Wszystkie przyciski cyfr korzystają ze wspólnego listenera `sharedListener`, który przekazuje tekst klikniętego przycisku do metody `appendSymbol()`.
+![Zrzut ekranu aplikacji Zgadywanka](docs/gussTheNumberGame.png)
 
-Jeśli chcemy ograniczyć długość wyświetlanej liczby do 10 znaków, wystarczy wprowadzić sprawdzenie w jednym miejscu - w metodzie `appendSymbol()`.
+## Obsługa zdarzeń
 
-## Odpowiedź na pytanie z zadania
+W aplikacji zastosowano dwa sposoby podpinania obsługi kliknięć.
 
-- **Etap 1: 10 miejsc w kodzie** - każde z dziesięciu przycisków cyfr wymagałoby osobnej zmiany.
-- **Etap 3: 1 miejsce w kodzie** - wystarczy zmienić wspólną metodę `appendSymbol()`.
+### 1. Wspólny listener
 
-Refaktoryzacja zmniejsza liczbę miejsc wymagających zmian z 10 do 1, dzięki czemu kod jest prostszy i łatwiejszy w utrzymaniu.
+W pliku `MainActivity.java` utworzono listener `gameListener`:
 
-## Obsługa działań i błędów
 
-Kalkulator obsługuje dodawanie, odejmowanie, mnożenie i dzielenie, a także liczby dziesiętne. Przycisk `=` oblicza wynik, a przycisk `C` czyści wyświetlacz i przywraca stan początkowy.
 
-W przypadku dzielenia przez zero lub niepoprawnego wyniku na wyświetlaczu pojawia się komunikat `Error`.
+private final View.OnClickListener gameListener = view -> checkGuess();
 
-## Limit wyświetlacza
 
-Wyświetlacz obsługuje maksymalnie 10 znaków dla bieżącej liczby. Dłuższe wyniki są przedstawiane w notacji naukowej, jeśli mieszczą się w limicie.
+Listener jest podpinany do przycisku „Sprawdź” w metodzie `onCreate()`:
 
-## Poprawka zera wiodącego
 
-W metodzie `appendSymbol()` dodano warunek, który zastępuje początkowe zero wpisywaną cyfrą. Dzięki temu po naciśnięciu `0`, a następnie `5`, wyświetlacz pokazuje `5` zamiast `05`.
+
+btnGuess.setOnClickListener(gameListener);
+
+
+Dzięki temu obsługa kliknięcia jest oddzielona od kodu konfigurującego interfejs.
+
+### 2. Anonimowa klasa OnClickListener
+
+Przycisk „Nowa gra” korzysta z anonimowej klasy `View.OnClickListener`, również w metodzie `onCreate()`:
+
+
+
+btnNewGame.setOnClickListener(new View.OnClickListener() { @Override public void onClick(View view) { startNewGame(); } });
+
+
+Po kliknięciu przycisku wywoływana jest metoda `startNewGame()`.
+
+## Walidacja i obsługa błędów
+
+Aplikacja sprawdza, czy pole nie jest puste oraz czy wpisana liczba należy do zakresu od 1 do 100.
+
+W przypadku pustego pola, niepoprawnej liczby lub próby wykonania ruchu po zakończeniu gry wyświetlany jest komunikat `Toast`. Aplikacja nie kończy działania z powodu niepoprawnych danych.
+
+## Organizacja kodu
+
+Metoda `onCreate()` inicjalizuje widoki i podpina zdarzenia. Logika gry znajduje się w osobnych metodach:
+
+- `startNewGame()` - losowanie liczby i reset stanu gry;
+- `checkGuess()` - sprawdzanie propozycji i aktualizacja licznika prób.
+
+Teksty interfejsu i komunikaty przechowywane są w `res/values/strings.xml`.
