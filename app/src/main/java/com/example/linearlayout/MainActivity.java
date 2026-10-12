@@ -27,13 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private final Random random = new Random();
 
-    private final View.OnClickListener gameListener = view -> {
-        if (view.getId() == R.id.btnNewGame) {
-            startNewGame();
-        } else if (view.getId() == R.id.btnGuess) {
-            checkGuess();
-        }
-    };
+    // Shared listener for checking the guess.
+    private final View.OnClickListener gameListener = view -> checkGuess();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +55,16 @@ public class MainActivity extends AppCompatActivity {
         Button btnGuess = findViewById(R.id.btnGuess);
         Button btnNewGame = findViewById(R.id.btnNewGame);
 
+        // Listener style 1: shared listener.
         btnGuess.setOnClickListener(gameListener);
-        btnNewGame.setOnClickListener(gameListener);
+
+        // Listener style 2: anonymous OnClickListener.
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startNewGame();
+            }
+        });
 
         startNewGame();
     }
@@ -97,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        int guess;
+        final int guess;
 
         try {
             guess = Integer.parseInt(text);
